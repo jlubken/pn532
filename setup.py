@@ -38,7 +38,7 @@ setup(
     install_requires=INSTALL_REQUIRES,
     packages=find_packages("src"),
     package_dir={"": "src"},
-    python_requires=">=3.7.7,!=3.8.*,!=3.9.*",
+    python_requires=">=3.7.3,!=3.8.*,!=3.9.*",
     setup_requires=SETUP_REQUIRES,
     tests_require=TEST_REQUIRES,
     use_scm_version={"local_scheme": "dirty-tag"},
