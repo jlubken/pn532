@@ -47,12 +47,12 @@ def mode(value):
         "spi": spi,
         "uart": uart,
     }
-    return modes.get(value, spi)
+    return modes[value]
 
 
 def parse_mode(description, run):
     """Parse mode."""
     parser = ArgumentParser(description=description)
-    parser.add_argument("mode", type=mode, default=spi)
+    parser.add_argument("--mode", type=mode, default=spi)
     args = parser.parse_args()
     run(args.mode)
