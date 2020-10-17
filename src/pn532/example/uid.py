@@ -8,16 +8,12 @@ is the most reliable and universally supported.
 After initialization, try waving various 13.56MHz RFID cards over it!
 """
 
-import RPi.GPIO as GPIO  # noqa: N814
-
 from pn532.example import parse_mode
 
 
 def run(mode):
     """Run."""
-    try:
-        pn532 = mode()
-
+    with mode() as pn532:
         ic, ver, rev, support = pn532.get_firmware_version()
         print("Found PN532 with firmware version: {0}.{1}".format(ver, rev))
 
@@ -33,10 +29,6 @@ def run(mode):
             if uid is None:
                 continue
             print("Found card with UID:", [hex(i) for i in uid])
-    except Exception as e:
-        print(e)
-    finally:
-        GPIO.cleanup()
 
 
 def main():

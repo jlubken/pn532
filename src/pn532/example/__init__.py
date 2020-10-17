@@ -2,6 +2,9 @@
 """Example."""
 
 from argparse import ArgumentParser
+from contextlib import contextmanager
+
+from RPi.GPIO import GPIO  # noqa: N814
 
 from pn532 import (
     PN532_SPI,
@@ -10,19 +13,31 @@ from pn532 import (
 )
 
 
-def spi():
-    """Return default spi device."""
-    return PN532_SPI(debug=False, reset=20, cs=4)
+@contextmanager
+def spi(debug=False, reset=20, cs=4):
+    """Yield a spi device."""
+    try:
+        yield PN532_SPI(debug=debug, reset=reset, cs=cs)
+    finally:
+        GPIO.cleanup()
 
 
-def i2c():
-    """Return default i2c device."""
-    return PN532_I2C(debug=False, reset=20, req=16)
+@contextmanager
+def i2c(debug=False, reset=20, req=16):
+    """Yield a i2c device."""
+    try:
+        yield PN532_I2C(debug=debug, reset=reset, req=req)
+    finally:
+        GPIO.cleanup()
 
 
-def uart():
-    """Return default uart device."""
-    return PN532_UART(debug=False, reset=20)
+@contextmanager
+def uart(debug=False, reset=20):
+    """Yield a uart device."""
+    try:
+        yield PN532_UART(debug=debug, reset=reset)
+    finally:
+        GPIO.cleanup()
 
 
 def mode(value):

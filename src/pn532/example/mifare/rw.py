@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+Read/write mifare.
+
 This example shows connecting to the PN532 and writing an M1
 type RFID tag
 
@@ -13,17 +15,13 @@ since 'KEY A' is unreadable. In contrast, the last 6 bytes (KEY B) of the
 2.  Block 0 is unwritable.
 """
 
-import RPi.GPIO as GPIO  # noqa: N814
-
 import pn532.pn532 as nfc
 from pn532.example import parse_mode
 
 
 def run(mode):
     """Run."""
-    try:
-        pn532 = mode()
-
+    with mode() as pn532:
         ic, ver, rev, support = pn532.get_firmware_version()
         print("Found PN532 with firmware version: {0}.{1}".format(ver, rev))
 
@@ -86,8 +84,6 @@ def run(mode):
                 print("write block %d successfully" % block_number)
         except nfc.PN532Error as e:
             print(e.errmsg)
-    finally:
-        GPIO.cleanup()
 
 
 def main():

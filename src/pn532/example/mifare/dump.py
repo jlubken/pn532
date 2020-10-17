@@ -6,8 +6,6 @@ This example shows connecting to the PN532 and reading an M1
 type RFID tag
 """
 
-import RPi.GPIO as GPIO  # noqa: N814
-
 import pn532.pn532 as nfc
 
 from pn532.example import parse_mode
@@ -15,9 +13,7 @@ from pn532.example import parse_mode
 
 def run(mode):
     """Run."""
-    try:
-        pn532 = mode()
-
+    with mode() as pn532:
         ic, ver, rev, support = pn532.get_firmware_version()
         print("Found PN532 with firmware version: {0}.{1}".format(ver, rev))
 
@@ -57,8 +53,6 @@ def run(mode):
             except nfc.PN532Error as e:
                 print(e.errmsg)
                 break
-    finally:
-        GPIO.cleanup()
 
 
 def main():

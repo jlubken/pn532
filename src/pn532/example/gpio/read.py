@@ -5,16 +5,12 @@ GPIO read.
 This example shows connecting to the PN532 and reading the GPIOs.
 """
 
-import RPi.GPIO as GPIO  # noqa: N814
-
 from pn532.example import parse_mode
 
 
 def run(mode):
     """Run."""
-    try:
-        pn532 = mode()
-
+    with mode() as pn532:
         ic, ver, rev, support = pn532.get_firmware_version()
         print("Found PN532 with firmware version: {0}.{1}".format(ver, rev))
 
@@ -29,8 +25,6 @@ def run(mode):
         print("i0:", pn532.read_gpio("I0"))
         print("i1:", pn532.read_gpio("I1"))
         print("P34:", pn532.read_gpio("P34"))
-    finally:
-        GPIO.cleanup()
 
 
 def main():

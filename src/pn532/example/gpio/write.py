@@ -5,16 +5,12 @@ GPIO Write.
 This example shows connecting to the PN532 and writing the GPIOs.
 """
 
-import RPi.GPIO as GPIO  # noqa: N814
-
 from pn532.example import parse_mode
 
 
 def run(mode):
     """Run."""
-    try:
-        pn532 = mode()
-
+    with mode() as pn532:
         ic, ver, rev, support = pn532.get_firmware_version()
         print("Found PN532 with firmware version: {0}.{1}".format(ver, rev))
 
@@ -50,8 +46,6 @@ def run(mode):
         )
         print("2.  P71/P72 are always HIGH in SPI mode.")
         print("3.  DO NOT reset the P32 and P34 pins.")
-    finally:
-        GPIO.cleanup()
 
 
 def main():
