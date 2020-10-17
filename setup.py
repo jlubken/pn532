@@ -18,6 +18,18 @@ TEST_REQUIRES = (
 )
 
 setup(
+    entry_points={
+        "console_scripts": [
+            "pn532.mifare.dump = pn532.example.mifare.dump:main",
+            "pn532.mifare.rw = pn532.example.mifare.rw:main",
+            "pn532.ntag2.dump = pn532.example.ntag2.dump:main",
+            "pn532.ntag2.rw = pn532.example.ntag2.rw:main",
+            "pn532.get.uid = pn532.example.uid:main",
+            "pn532.gpio.read = pn532.example.gpio.read:main",
+            "pn532.gpio.write = pn532.example_gpio.write:main",
+            "pn532.uart.hex = pn532.example.uart.hex:main",
+        ]
+    },
     extras_require={
         "all": TEST_REQUIRES,
         "test": TEST_REQUIRES,
