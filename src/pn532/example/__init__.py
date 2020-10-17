@@ -4,7 +4,7 @@
 from argparse import ArgumentParser
 from contextlib import contextmanager
 
-from RPi.GPIO import GPIO  # noqa: N814
+from RPi import GPIO  # noqa: N814
 
 from pn532 import (
     PN532_SPI,
