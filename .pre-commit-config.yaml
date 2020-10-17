@@ -1,0 +1,32 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.3.0
+  hooks:
+  - id: check-added-large-files
+  - id: check-case-conflict
+  - id: check-docstring-first
+  - id: check-executables-have-shebangs
+  - id: check-json
+  - id: check-merge-conflict
+  - id: check-toml
+  - id: check-symlinks
+  - id: check-xml
+  - id: check-yaml
+  - id: end-of-file-fixer
+  - id: fix-encoding-pragma
+  - id: mixed-line-ending
+  - id: requirements-txt-fixer
+  - id: trailing-whitespace
+- repo: http://github.com/pre-commit/pygrep-hooks
+  rev: v1.4.2
+  hooks:
+  - id: python-check-blanket-noqa
+  - id: python-use-type-annotations
+  - id: rst-backticks
+- repo: https://github.com/psf/black
+  rev: 19.10b0
+  hooks:
+  - id: black
+    language: system
+default_language_version:
+  python: python3
