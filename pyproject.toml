@@ -7,12 +7,12 @@ requires = [
 
 [project]
 name = "pn532"
-python = ">=3.7.3,!=3.8.*,!=3.9.*"
+python = ">=3.7.3"
 readme = "readme.md"
 
 [tool.black]
 line-length = 79
-target-version = ["py37"]
+target-version = ["py37", "py38"]
 
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
